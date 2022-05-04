@@ -1,0 +1,89 @@
+<div class="page-header text-center">
+	<h1>{{prof.titulo}}</h1>
+</div>
+
+<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+
+<form novalidate name="formulario" class="row" ng-submit="submeter()">
+	<div class="col-md-6">
+		<div class="form-group">
+			<label>Nome Professor</label>
+			<input name="titulo" class="form-control" ng-model="prof.titulo" required>  
+
+			<span ng-show = "formulario.$submitted && formulario.titulo.$error.required"
+				class="form-control alert-danger">
+				Nome obrigatório
+			</span>
+			<span ng-show="formulario.$submitted && formulario.titulo.$error.maxlength" 
+				class="form-control alert-danger">
+				No máximo 20 caracteres!
+			</span>
+		<div class="form-group">
+			<label>Link curriculo lattes</label>
+			<input name="curriculo" class="form-control" ng-model="prof.curriculo">  
+
+			<span ng-show = "formulario.$submitted">
+			</span>
+		</div>
+		<div class="form-group">
+			<label>E-mail</label>
+			<input name="email" class="form-control" ng-model="prof.email" required>  
+
+			<span ng-show = "formulario.$submitted && formulario.email.$error.required"
+				class="form-control alert-danger">
+				E-mail obrigatório
+			</span>
+			<span ng-show="formulario.$submitted && formulario.email.$error.maxlength" 
+				class="form-control alert-danger">
+			</span>
+		</div>
+		<div class="form-group">
+			<label>Telefone</label>
+			<input name="telefone" class="form-control" ng-model="prof.telefone" required>  
+
+			<span ng-show = "formulario.$submitted && formulario.telefone.$error.required"
+				class="form-control alert-danger">
+				Telefone obrigatório
+			</span>
+			<span ng-show="formulario.$submitted && formulario.telefone.$error.maxlength" 
+				class="form-control alert-danger">
+			</span>
+		</div>
+		<div class="form-group">
+			<label>URL prof Estudante</label>
+			<input name="url" class="form-control" ng-model="prof.url" required>
+
+			<span ng-show = "formulario.$submitted && formulario.url.$error.required" 
+				class="form-control alert-danger">
+				URL obrigatória
+			</span> 
+		</div>
+		<div class="form-group">
+			<label>Descrição do trabalho</label>
+			<textarea name="descricao" class="form-control" ng-model="prof.descricao">
+			</textarea>
+		</div>
+
+		<div class="form-group">
+			<label>Área</label>
+			<select name="grupo" ng-model="prof.grupo" class="form-control" 
+					required ng-controller="GruposController" 
+					ng-options="grupo._id as (grupo.nome | uppercase) for grupo in grupos">
+				<option value="">Escolha uma área</option>
+			</select>
+			<span ng-show="formulario.$submitted && formulario.grupo.$error.required" 
+				class="form-control alert-danger">
+				Grupo obrigatório
+			</span>
+		</div>
+
+		<button type="submit" class="btn btn-primary" ng-disabled="formulario.$invalid">
+			Salvar
+		</button>
+		<a href="/#/profs" class="btn btn-primary">Voltar</a>
+		<hr>
+	</div>
+	<div class="col-md-6">
+		<minha-prof url="{{prof.url}}" titulo="{{prof.titulo}}"></minha-prof>
+	</div>
+</form>
